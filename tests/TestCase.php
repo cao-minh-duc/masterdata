@@ -2,20 +2,16 @@
 
 namespace CaoMinhDuc\Masterdata\Tests;
 
-use Orchestra\Testbench\TestCase;
+use Orchestra\Testbench\TestCase as BaseTestCase;
 use CaoMinhDuc\Masterdata\MasterdataServiceProvider;
 
-class ExampleTest extends TestCase
+class TestCase extends BaseTestCase
 {
+    
 
     protected function getPackageProviders($app)
     {
         return [MasterdataServiceProvider::class];
     }
     
-    /** @test */
-    public function true_is_true()
-    {
-        $this->assertTrue(true);
-    }
 }

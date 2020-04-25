@@ -2,6 +2,7 @@
 
 namespace CaoMinhDuc\Masterdata;
 
+use CaoMinhDuc\Masterdata\Masterdata;
 use Illuminate\Support\ServiceProvider;
 
 class MasterdataServiceProvider extends ServiceProvider
@@ -16,7 +17,7 @@ class MasterdataServiceProvider extends ServiceProvider
          */
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'masterdata');
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'masterdata');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         if ($this->app->runningInConsole()) {
@@ -53,8 +54,6 @@ class MasterdataServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'masterdata');
 
         // Register the main class to use with the facade
-        $this->app->singleton('masterdata', function () {
-            return new Masterdata;
-        });
+        $this->app->singleton('masterdata', Masterdata::class);
     }
 }
