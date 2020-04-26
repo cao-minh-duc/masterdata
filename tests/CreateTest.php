@@ -4,11 +4,12 @@ namespace CaoMinhDuc\Masterdata;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Str;
 use CaoMinhDuc\Masterdata\Tests\TestCase;
+use CaoMinhDuc\Masterdata\Tests\Support\Data;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CreateTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, Data;
 
     /** 
      * @test
@@ -24,7 +25,7 @@ class CreateTest extends TestCase
 
     /**
      * @test
-     * @dataProvider createData
+     * @dataProvider data
      */
     public function create($data)
     {
@@ -37,20 +38,5 @@ class CreateTest extends TestCase
                 'data' => json_encode($data)
             ]
         );
-    }
-
-    public function createData()
-    {
-        return [
-            [
-                ['value' => 1]
-            ],
-            [
-                ['value' => NULL]
-            ],
-            [
-                ['value' => []]
-            ]
-        ];
     }
 }
