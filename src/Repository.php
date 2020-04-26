@@ -6,8 +6,9 @@ use CaoMinhDuc\Masterdata\Model;
 
 class Repository
 {
-    public static function create(array $data)
+    public static function create(?array $data = NULL): Model
     {
-        return Model::create($data);
+        $model = Model::create(['data'=>$data]);
+        return $model;
     }
 }

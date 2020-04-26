@@ -12,9 +12,12 @@ class Masterdata
     {
         $this->repository = $repository;
     }
-    
-    public static function __callStatic($method, $arguments)
+
+    public static function __callStatic($method,array $arguments = [])
     {
-        return app(self::class)->repository->$method($arguments);
+        
+        return app(self::class)->repository->$method(
+            ...$arguments
+        );
     } 
 }

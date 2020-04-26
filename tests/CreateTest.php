@@ -13,12 +13,44 @@ class CreateTest extends TestCase
     /** 
      * @test
     */
-    public function create()
+    public function create_empty()
     {
-        $masterdata = Masterdata::create([]);
+        $masterdata = Masterdata::create();
         $this->assertTrue(Str::isUuid($masterdata->id));
         $this->assertDatabaseHas('masterdata',[
             'data' => NULL
         ]);
+    }
+
+    /**
+     * @test
+     * @dataProvider createData
+     */
+    public function create($data)
+    {
+        $masterdata = Masterdata::create($data);
+        
+        $this->assertEquals($data['value'], $masterdata->data['value']);
+        $this->assertDatabaseHas(
+            'masterdata',
+            [
+                'data' => json_encode($data)
+            ]
+        );
+    }
+
+    public function createData()
+    {
+        return [
+            [
+                ['value' => 1]
+            ],
+            [
+                ['value' => NULL]
+            ],
+            [
+                ['value' => []]
+            ]
+        ];
     }
 }
