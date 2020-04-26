@@ -2,25 +2,32 @@
 namespace CaoMinhDuc\Masterdata;
 
 use CaoMinhDuc\Masterdata\Model;
-
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Repository
 {
-    public function create(?array $data = NULL): Model
+    private Eloquent $model;
+
+    public function __construct(Model $model)
     {
-        $model = Model::create(['data'=>$data]);
+        $this->model = $model;
+    }
+
+    public function create(?array $data = NULL): Eloquent
+    {
+        $model = $this->model->create(['data'=>$data]);
         return $model;
     }
 
-    public function find($id): Model
+    public function find($id): Eloquent
     {
-        $model = Model::find($id);
+        $model = $this->model->find($id);
         return $model;
     }
 
     public function update(array $data,$id): bool
     {
-        $model = Model::find($id);
+        $model = $this->model->find($id);
         return $model->update([
             'data' => array_merge($model->data,$data)
         ]);
